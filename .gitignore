@@ -14,3 +14,10 @@ pom.xml.asc
 /.repl
 *.log
 /.env
+
+### Shadow-Cljs ###
+.shadow-cljs
+
+### Node ###
+#Dependency directories
+node_modules/
