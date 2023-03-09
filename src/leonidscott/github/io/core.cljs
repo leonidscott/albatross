@@ -12,7 +12,7 @@
 (defn home-page []
   [:div
    [:h2 "Welcome to Reagent"]
-   [plot/plot]])
+   [plot/ellipse-plot]])
 
 ;; -------------------------
 ;; Initialize app
