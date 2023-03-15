@@ -10,10 +10,12 @@
 ;;; ****************  Plot effect ****************
 
 (re/reg-fx :effects/plot!
-    (fn [{:keys [element-id data]}]
+    (fn [{:keys [element-id data layout config]}]
       (. plotly react
          (-> js/document (.getElementById element-id))
-         (clj->js data))))
+         (clj->js data)
+         (clj->js (if layout layout {}))
+         (clj->js (if config config {})))))
 
 
 (events/reg-event-fx
@@ -49,8 +51,25 @@
     (fn []
       (let [{:keys [a b]} @ellipse-params]
         [:div
-         [plot {:element-id "ellipse-plot" :data (ellipse-data a b)}]
+         [plot {:element-id "ellipse-plot"
+                :data (ellipse-data a b)
+                :layout {:title "Ellipse"
+                         :xaxis {:range [-20 20]
+                                 :showgrid false
+                                 :zeroline false
+                                 :showline true}
+                         :yaxis {:range [-20 20]
+                                 :showgrid false
+                                 :zeroline false
+                                 :showline true}}
+                :config {:staticPlot true
+                         #_#_:responsive true
+                         #_#_:autosizable true}}]
          [re-com/slider {:model     a
-                         :on-change #(swap! ellipse-params assoc :a %)}]
+                         :on-change #(swap! ellipse-params assoc :a %)
+                         :min 0
+                         :max 20}]
          [re-com/slider {:model     b
-                         :on-change #(swap! ellipse-params assoc :b %)}]]))))
+                         :on-change #(swap! ellipse-params assoc :b %)
+                         :min 0
+                         :max 20}]]))))
