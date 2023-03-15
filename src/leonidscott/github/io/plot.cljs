@@ -44,11 +44,6 @@
     [{:x (map (fn [ϴ] (* a (Math/cos ϴ))) ϴ-points)
       :y (map (fn [ϴ] (* b (Math/sin ϴ))) ϴ-points)}]))
 
-(defn slider []
-  (let [slider-val (r/atom 0)]
-    (fn []
-      [re-com/slider {:model @slider-val :on-change #(reset! slider-val %)}])))
-
 (defn ellipse-plot []
   (let [ellipse-params (r/atom {:a 5 :b 2})]
     (fn []
