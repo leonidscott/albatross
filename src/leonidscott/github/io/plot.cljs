@@ -19,8 +19,8 @@
 
 (events/reg-event-fx
   :events/plot
-  (fn [_ [_ plot-map]]
-    {:effects/plot! plot-map}))
+  (fn [_ [_ plot-map]] {:effects/plot! plot-map}))
+
 
 ;;; ****************  General Plot Component ****************
 
@@ -29,8 +29,7 @@
     {:reagent-render
      (fn [] [:div {:id element-id :style {:width "600px" :height "250px"}}])
 
-     :component-did-mount
-     #(re/dispatch [:events/plot plot-map])}))
+     :component-did-mount #(re/dispatch [:events/plot plot-map])}))
 
 ;;; **************** Specific Plots ****************
 
@@ -46,11 +45,25 @@
 
 ;;; Ellipse Parametric Plot
 
-(defn ellipse-data []
+(defn ellipse-data
+  "x = a cos(t)
+   y = b sin(t)"
+  [a b]
   (let [ϴ-points (into [] (doall (range 0 (* 2 Math/PI) (/ Math/PI 50))))
-        data     [{:x (map (fn [ϴ] (* 5 (Math/cos ϴ))) ϴ-points)
-                   :y (map (fn [ϴ] (* 2 (Math/sin ϴ))) ϴ-points)}]]
-    {:margin {:t 0} :data   data}))
+        data     [{:x (map (fn [ϴ] (* a (Math/cos ϴ))) ϴ-points)
+                   :y (map (fn [ϴ] (* b (Math/sin ϴ))) ϴ-points)}]]
+    {:margin {:t 0} :data data}))
+
+(defn slider []
+  (let [slider-val (r/atom 0)]
+    (fn []
+      [re-com/slider {:model @slider-val :on-change #(reset! slider-val %)}])))
 
 (defn ellipse-plot []
-  [plot (merge {:element-id "ellipse-plot"} (ellipse-data))])
+  (let [ellipse-params (r/atom {:a 5 :b 2})]
+    (fn []
+      (let [{:keys [a b]} @ellipse-params]
+        [:div
+         [plot (merge {:element-id "ellipse-plot"} (ellipse-data a b))]
+         [re-com/slider {:model     a
+                         :on-change #(swap! ellipse-params assoc :a %)}]]))))
