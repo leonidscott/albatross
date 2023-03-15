@@ -40,10 +40,9 @@
   "x = a cos(t)
    y = b sin(t)"
   [a b]
-  (let [ϴ-points (into [] (doall (range 0 (* 2 Math/PI) (/ Math/PI 50))))
-        data     [{:x (map (fn [ϴ] (* a (Math/cos ϴ))) ϴ-points)
-                   :y (map (fn [ϴ] (* b (Math/sin ϴ))) ϴ-points)}]]
-    {:data data}))
+  (let [ϴ-points (into [] (doall (range 0 (* 2 Math/PI) (/ Math/PI 50))))]
+    [{:x (map (fn [ϴ] (* a (Math/cos ϴ))) ϴ-points)
+      :y (map (fn [ϴ] (* b (Math/sin ϴ))) ϴ-points)}]))
 
 (defn slider []
   (let [slider-val (r/atom 0)]
@@ -55,7 +54,7 @@
     (fn []
       (let [{:keys [a b]} @ellipse-params]
         [:div
-         [plot (merge {:element-id "ellipse-plot"} (ellipse-data a b))]
+         [plot {:element-id "ellipse-plot" :data (ellipse-data a b)}]
          [re-com/slider {:model     a
                          :on-change #(swap! ellipse-params assoc :a %)}]
          [re-com/slider {:model     b
