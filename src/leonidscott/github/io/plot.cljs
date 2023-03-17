@@ -50,7 +50,7 @@
   (let [ellipse-params (r/atom {:a 5 :b 2})]
     (fn []
       (let [{:keys [a b]} @ellipse-params]
-        [:div
+        [:div.main-plot
          [plot {:element-id "ellipse-plot"
                 :data (ellipse-data a b)
                 :layout {:title "Ellipse"
@@ -63,13 +63,15 @@
                                  :zeroline false
                                  :showline true}}
                 :config {:staticPlot true
-                         #_#_:responsive true
+                         :responsive true
                          #_#_:autosizable true}}]
-         [re-com/slider {:model     a
-                         :on-change #(swap! ellipse-params assoc :a %)
-                         :min 0
-                         :max 20}]
-         [re-com/slider {:model     b
-                         :on-change #(swap! ellipse-params assoc :b %)
-                         :min 0
-                         :max 20}]]))))
+         [:div {:style {:display "flex"
+                        :flex-direction "column"}}
+          [re-com/slider {:model     a
+                          :on-change #(swap! ellipse-params assoc :a %)
+                          :min       0
+                          :max       20}]
+          [re-com/slider {:model     b
+                          :on-change #(swap! ellipse-params assoc :b %)
+                          :min       0
+                          :max       20}]]]))))

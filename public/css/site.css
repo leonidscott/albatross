@@ -32,3 +32,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.main-plot {
+    display: grid;
+    grid-template-rows: 50vh 1fr;
+}
