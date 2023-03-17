@@ -46,25 +46,25 @@
     [{:x (map (fn [ϴ] (* a (Math/cos ϴ))) ϴ-points)
       :y (map (fn [ϴ] (* b (Math/sin ϴ))) ϴ-points)}]))
 
+
 (defn ellipse-plot []
   (let [ellipse-params (r/atom {:a 5 :b 2})]
     (fn []
       (let [{:keys [a b]} @ellipse-params]
         [:div.main-plot
          [plot {:element-id "ellipse-plot"
-                :data (ellipse-data a b)
-                :layout {:title "Ellipse"
-                         :xaxis {:range [-20 20]
-                                 :showgrid false
-                                 :zeroline false
-                                 :showline true}
-                         :yaxis {:range [-20 20]
-                                 :showgrid false
-                                 :zeroline false
-                                 :showline true}}
-                :config {:staticPlot true
-                         :responsive true
-                         #_#_:autosizable true}}]
+                :data       (ellipse-data a b)
+                :layout     {:margin {:b 30 :l 30 :t 30 :r 30}
+                             :xaxis {:range [-20 20]
+                                     :showgrid false
+                                     :zeroline false
+                                     :showline true}
+                             :yaxis {:range [-20 20]
+                                     :showgrid false
+                                     :zeroline false
+                                     :showline true}}
+                :config     {:staticPlot true
+                             :responsive true}}]
          [:div {:style {:display "flex"
                         :flex-direction "column"}}
           [re-com/slider {:model     a
