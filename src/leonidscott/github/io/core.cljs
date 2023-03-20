@@ -2,7 +2,7 @@
     (:require
       [leonidscott.github.io.config :as config]
       [leonidscott.github.io.events :as events]
-      [leonidscott.github.io.plot   :as plot]
+      [leonidscott.github.io.naca   :as naca]
       [reagent.dom :as d]
       [re-frame.core :as re-frame]))
 
@@ -12,7 +12,7 @@
 (defn home-page []
   [:div
    [:h2 "Welcome to Reagent"]
-   [plot/ellipse-plot]])
+   [naca/naca-plot]])
 
 ;; -------------------------
 ;; Initialize app
