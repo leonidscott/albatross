@@ -1,5 +1,8 @@
 (ns leonidscott.github.io.naca
-  (:require [leonidscott.github.io.plot :as plot]))
+  (:require
+   [leonidscott.github.io.plot :as plot]
+   [reagent.core :as r]
+   [re-com.core :as re-com]))
 
 (defn camber-line-fn
   "y_{c}(x) =
@@ -93,7 +96,11 @@
 
 (defn naca-data
   [naca-params]
-  (let [x-points (into [] (doall (range 0 1 (/ 1 60))))
+  (let [x-points (->> (range 0 Math/PI (/ Math/PI 50))
+                      (map (fn [β] (/ (- 1 (Math/cos β))
+                                      2)))
+                      doall
+                      (into []))
         y-c      (camber-line-fn naca-params)
         y-t      (thickness-distrubtion-fn naca-params)
         ϴ        (fn [x] (Math/atan ((camber-line-gradient-fn naca-params) x)))
@@ -107,17 +114,33 @@
       :y (reduce #(conj %1 (:y %2)) [] l-points)}]))
 
 (defn naca-plot []
-  (let [naca-params {:m 0.02 :p 0.4 :t 0.12 :open? false}]
-    [plot/plot {:element-id "naca-plot"
-                :data       (naca-data naca-params)
-                :layout     {:margin {:b 30 :l 30 :t 30 :r 30}
-                             :xaxis  {:range    [0 1]
-                                      :showgrid false
-                                      :zeroline false
-                                      :showline true}
-                             :yaxis  {:range    [-0.5 0.5]
-                                      :showgrid false
-                                      :zeroline false
-                                      :showline true}}
-                :config     {:staticPlot true
-                             :responsive true}}]))
+  (let [naca-params (r/atom {:m 0.02 :p 0.4 :t 0.12 :open? false})]
+    (fn []
+      [:div.main-plot
+       [plot/plot {:element-id "naca-plot"
+                   :data       (naca-data @naca-params)
+                   :layout     {:margin {:b 30 :l 30 :t 30 :r 30}
+                                :xaxis  {:range    [-0.2 1.2]
+                                         :showgrid false
+                                         :zeroline false
+                                         :showline true}
+                                :yaxis  {:range    [-0.5 0.5]
+                                         :showgrid false
+                                         :zeroline false
+                                         :showline true}}
+                   :config     {:staticPlot true
+                                :responsive true}}]
+       [:div {:style {:display        "flex"
+                      :flex-direction "column"}}
+        [re-com/slider {:model     (* (:m @naca-params) 100)
+                        :on-change #(swap! naca-params assoc :m (/ % 100))
+                        :min       0
+                        :max       100}]
+        [re-com/slider {:model     (* (:p @naca-params) 100)
+                        :on-change #(swap! naca-params assoc :p (/ % 100))
+                        :min       0
+                        :max       100}]
+        [re-com/slider {:model     (* (:t @naca-params) 100)
+                        :on-change #(swap! naca-params assoc :t (/ % 100))
+                        :min       0
+                        :max       40}]]])))
