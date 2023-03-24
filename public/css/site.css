@@ -66,7 +66,7 @@ a:hover {
 
 .explanation {
     background-color: #fff;
-    margin: 0 -150px 0;
+    margin: 0 -200px 0;
     overflow: auto;
     padding: 29px 60px 15px 60px;
 }
@@ -79,6 +79,15 @@ a:hover {
     line-height: 1.25em;
     margin-top: 0.25em;
     margin-bottom: 0.25em;
+}
+
+.explanation h2 {
+    font-size: 24px;
+    line-height: 26px;
+    margin-top: 38px;
+    margin-bottom: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
 }
 
 .explanation > p, .demo-text > ul {
