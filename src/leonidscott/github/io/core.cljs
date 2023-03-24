@@ -9,9 +9,14 @@
 ;; -------------------------
 ;; Views
 
+(defn banner []
+  [:div.banner
+   [:h1.banner-text #_{:style {:font-family "URW Chancery L, cursive"}}
+    "Albatross"]])
+
 (defn home-page []
   [:div
-   [:h2 "Welcome to Reagent"]
+   [banner]
    [naca/naca-plot]])
 
 ;; -------------------------

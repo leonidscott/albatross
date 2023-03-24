@@ -1,23 +1,23 @@
 body {
-  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-top: 72px;
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue', arial;
   -webkit-font-smoothing: antialiased;
   font-size: 1.125em;
-  color: #333;
+  background-color: #eeeeec;
   line-height: 1.5em;
 }
 
 h1, h2, h3 {
   color: #000;
+  margin: 0px; /* Re-com thing */
+  font-size: 3em;
 }
 h1 {
   font-size: 2.5em
 }
 
 h2 {
-  font-size: 2em
+    font-size: 2em;
+    margin: 0px; /* Re-com thing */
 }
 
 h3 {
@@ -33,9 +33,21 @@ a:hover {
   text-decoration: underline;
 }
 
+.banner-text {
+    font-family: 'Pacifico', cursive;
+    padding: 15px;
+    color: #1e36fd;
+}
+
+.banner {
+    height: 75px;
+    background-color: #D6D6D4;
+}
+
 .main-plot {
     display: grid;
     grid-template-rows: 50vh 1fr;
-    width: 100%;
+    grid-gap: 5px;
     margin: 30px 5vw;
+    max-width: 800px;
 }
