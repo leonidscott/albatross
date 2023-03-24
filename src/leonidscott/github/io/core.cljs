@@ -3,6 +3,7 @@
       [leonidscott.github.io.config :as config]
       [leonidscott.github.io.events :as events]
       [leonidscott.github.io.naca   :as naca]
+      [leonidscott.github.io.naca-text :as naca-text]
       [reagent.dom :as d]
       [re-frame.core :as re-frame]))
 
@@ -17,7 +18,8 @@
 (defn home-page []
   [:div
    [banner]
-   [naca/naca-plot]])
+   [naca/naca-plot]
+   [naca-text/text]])
 
 ;; -------------------------
 ;; Initialize app
