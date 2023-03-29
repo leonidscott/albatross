@@ -12,9 +12,11 @@ The following pictures shows the slighly arched, teardrop foil shape we often th
 Running directly from the leading ege to the trailing edge of the foil is the *cord line*. All measurements used in the NACA-4 encoding are made in reference to the cord line as a percentage of it. Deviating from the camber line, and giving the foil its arched shape, is the *camber line*. Notice that the upper and lower surfaces of the foil are always the same distance perpendicular to the camber line. Finally, the teardrop shape of the foil is created by varying the thickness of the foil along the camberline, rapidly increasing until a maximum thickness (about 1/4 way down the foil), and slowly tapering off to the trailing edge. 
 
 ### NACA MPXX
-Understanding these geometric properties, NACA-4 foils become pretty intuitive! Let's take a look at the following foil: NACA-2415
-* The first digit, **2**, represents the *maximum camber* (M)  of the foil. That means that the camber line deviates a maximum of 2% vertically above the cord line.
-* The second digit, **4**, represents the *maximum camber position* (P) of the foil. This describes where, latterally along the cord line, the maximum camber lays. In this case, the maxium deflection from the camber line occurs 40% down the cord line from the leading edge.
-* The finall two digits, **15**, represent the *maxium thickness* (XX) of the foil. This means that, at it's maximum, the thickness of the foil is 15% of the cord line.
+NACA 4 foils use the following format for encoding these features: `NACA MPXX`:
 
 
+[Insert my self-made, god damn masterpiece of a picture]
+
+* **M (Maximum Camber)** determines the maximum deflection the camber line makes from the chord line. **M** is defined as a percentage of the chord line length, as a hundredth of a percentage point. Consider an example foil, `NACA 2415`, with a chord length of one meter. In this case, the camber line deviates a maximum of 0.02%, or 2cm from the chord line.  
+* **P (Maximum Camber Position)** defines where along the chord line the maximum camber lays. **P** is defined as a percentage of the chord line length, starting from the leading edge, and is measured in tenths of a percent. For our example `NACA 2415` foil with a 1m chord, this would the maximum camber would lay 40% (40cm) down the length of the chord line.  
+* **XX (Thickness)** (Denoted as **T** in above) describes the maximum thickness of the foil as a percentage of the chord line length in hundredths of a percent. Therefore, our NACA 2415 foil sould have a maximum thickness of 15% of the chord line length (15cm).
