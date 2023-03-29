@@ -39,3 +39,25 @@
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)
   (mount-root))
+
+;;;TODO:
+;; General
+;;   * Float header correctly
+;;   * Publish to github
+;; Graph
+;;   * Center graph
+;;   * Swap to Material UI sliders
+;;   * Add reactive input boxes
+;;   * Add trailing edge open? checkbox box
+;;   * Add unit conversion option
+;;   * Remove legend
+;;   * Make sure to scale graph
+;;   * Make nicer default state
+;; Explanation
+;;   * Add citation
+;;   * Get someone to proofread
+;;   * Make text more reactive
+;; Future
+;;   * Make headings collapsable
+;;   * Make equations description
+
