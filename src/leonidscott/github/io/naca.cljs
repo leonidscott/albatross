@@ -121,13 +121,18 @@
                    :data       (naca-data @naca-params)
                    :layout     {:margin {:b 30 :l 30 :t 30 :r 30}
                                 :xaxis  {:range    [-0.2 1.2]
+                                         :dtick    0.25
                                          :showgrid false
                                          :zeroline false
                                          :showline true}
-                                :yaxis  {:range    [-0.5 0.5]
+                                :yaxis  {:range    [-0.25 0.25]
+                                         :dtick    0.25
                                          :showgrid false
                                          :zeroline false
-                                         :showline true}}
+                                         :showline true
+                                         :scaleanchor "x"
+                                         :scaleratio 1}
+                                :showlegend false}
                    :config     {:staticPlot true
                                 :responsive true}}]
        [:div {:style {:display        "flex"
