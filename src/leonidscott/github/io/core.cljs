@@ -47,6 +47,7 @@
 ;; Graph
 ;;   * Center graph
 ;;   * Swap to Material UI sliders
+;;   * Better slider bounds
 ;;   * Add reactive input boxes
 ;;   * Add trailing edge open? checkbox box
 ;;   * Add unit conversion option
