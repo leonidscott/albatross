@@ -42,22 +42,22 @@
 
 ;;;TODO:
 ;; General
-;;   * Float header correctly
+;;   * Float header correctly :check:
 ;;   * Publish to github
 ;; Graph
-;;   * Center graph
+;;   * Center graph :kind of done:
 ;;   * Swap to Material UI sliders
 ;;   * Better slider bounds
 ;;   * Add reactive input boxes
 ;;   * Add trailing edge open? checkbox box
 ;;   * Add unit conversion option
-;;   * Remove legend
-;;   * Make sure to scale graph
+;;   * Remove legend :check:
+;;   * Make sure to scale graph :check:
 ;;   * Make nicer default state
 ;; Explanation
-;;   * Add citation
+;;   * Add citation :check:
 ;;   * Get someone to proofread
-;;   * Make text more reactive
+;;   * Make text more reactive :check:
 ;; Future
 ;;   * Make headings collapsable
 ;;   * Make equations description
