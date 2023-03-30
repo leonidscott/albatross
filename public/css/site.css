@@ -9,6 +9,8 @@ body {
   font-size: 1.125em;
   background-color: #eeeeec;
   line-height: 1.5em;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* TODO: Go through h1, h2, h3, a, a:hover and figure out if I should just get rid of them. I can probs move explanation text into these fields then. */
@@ -59,16 +61,16 @@ a:hover {
 }
 
 .text-container{
-    width: 500px;
+    max-width: 900px;
     margin: 30px auto;
     padding-bottom: 60px;
 }
 
 .explanation {
     background-color: #fff;
-    margin: 0 -200px 0;
     overflow: auto;
     padding: 29px 60px 15px 60px;
+    word-wrap: break-word;
 }
 
 .explanation > h1 {
