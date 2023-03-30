@@ -113,8 +113,28 @@
      {:x (reduce #(conj %1 (:x %2)) [] l-points)
       :y (reduce #(conj %1 (:y %2)) [] l-points)}]))
 
+(defn param-slider
+  [{:keys [value on-change min max text]}]
+  [:div {:style {:max-width "100%"}}
+   [:p {:style {:margin "0 0 0"}}[:b text]]
+   [:div {:style {:display         "flex"
+                  :flex-direction  "row"
+                  :flex-wrap       "nowrap"
+                  :align-items     "center"
+                  :justify-content "space-between"}}
+    [re-com/slider {:model     value
+                    :on-change on-change
+                    :min       min
+                    :max       max
+                    :parts     {:wrapper {:style {:max-width "70%"}}}
+                    :style     {:max-width "100%"}}]
+    [re-com/input-text
+     :model     (.toString value)
+     :on-change on-change
+     :width     "50px"]]])
+
 (defn naca-plot []
-  (let [naca-params (r/atom {:m 0.02 :p 0.4 :t 0.12 :open? false})]
+  (let [naca-params (r/atom {:m 0.02 :p 0.4 :t 0.12 :open? false :unit :naca-unit})]
     (fn []
       [:div.main-plot
        [plot/plot {:element-id "naca-plot"
@@ -135,17 +155,33 @@
                                 :showlegend false}
                    :config     {:staticPlot true
                                 :responsive true}}]
-       [:div {:style {:display        "flex"
-                      :flex-direction "column"}}
-        [re-com/slider {:model     (* (:m @naca-params) 100)
+       [:div.main-plot-controls
+        [:div {:style {:display        "flex"
+                       :flex-direction "column"}}
+         [param-slider {:value     (* (:m @naca-params) 100)
                         :on-change #(swap! naca-params assoc :m (/ % 100))
                         :min       0
-                        :max       100}]
-        [re-com/slider {:model     (* (:p @naca-params) 100)
+                        :max       100
+                        :text      "M (Max Camber)"}]
+         [param-slider {:value     (* (:p @naca-params) 100)
                         :on-change #(swap! naca-params assoc :p (/ % 100))
                         :min       0
-                        :max       100}]
-        [re-com/slider {:model     (* (:t @naca-params) 100)
+                        :max       100
+                        :text      "P (Position Camber)"}]
+         [param-slider {:value     (* (:t @naca-params) 100)
                         :on-change #(swap! naca-params assoc :t (/ % 100))
                         :min       0
-                        :max       40}]]])))
+                        :max       40
+                        :text      "XX (Thickness)"}]]
+        [:div {:style {:margin-left "15px"}}
+         [:p {:style {:margin "0 0 0"}} [:b "Units"]]
+         [re-com/horizontal-bar-tabs
+          :model (:unit @naca-params)
+          :tabs  [{:id :naca-unit :label [:p "NACA"]}
+                  {:id :percentages :label [:p "%'s"]}]
+          :on-change #(swap! naca-params assoc :unit %)]
+
+         [:p {:style {:margin "15px 0 0"}} [:b "Open Trailing Edge?"]]
+         [re-com/checkbox {:model (:open? @naca-params)
+                           :on-change #(swap! naca-params assoc :open? %)
+                           :label "Open Trailing Edge"}]]]])))

@@ -42,23 +42,17 @@
 
 ;;;TODO:
 ;; General
-;;   * Float header correctly :check:
 ;;   * Publish to github
 ;; Graph
 ;;   * Center graph :kind of done:
-;;   * Swap to Material UI sliders
 ;;   * Better slider bounds
-;;   * Add reactive input boxes
-;;   * Add trailing edge open? checkbox box
-;;   * Add unit conversion option
-;;   * Remove legend :check:
-;;   * Make sure to scale graph :check:
+;;   * Make unit conversion functional
+;;   * Make it clear what the slider boundaries are.
 ;;   * Make nicer default state
 ;; Explanation
-;;   * Add citation :check:
 ;;   * Get someone to proofread
-;;   * Make text more reactive :check:
 ;; Future
 ;;   * Make headings collapsable
 ;;   * Make equations description
+;;   * Swap to Material UI sliders? (If I have more components)
 
