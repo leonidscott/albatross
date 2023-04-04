@@ -139,10 +139,14 @@
 
 
 (defn naca-text
-  [{:keys [:m :p :t :unit]}]
-  [:h1 (if (= unit :naca-unit)
-         (gstr/format "NACA %s%s%s" (* m 100) (* p 10) (* t 100))
-         (gstr/format "NACA\n(%s, %s, %s)" m p t))])
+  [{:keys [:m :p :t :m-scale :p-scale :t-scale :unit]}]
+  (let [round-fn (fn [par]
+                   (if (= unit :naca-unit)
+                     (gstr/format "%.2f" par)
+                     (gstr/format "%.2f" par)))]
+    [:h1 (if (= unit :naca-unit)
+           (gstr/format "NACA %s%s%s" (* m m-scale) (* p p-scale) (* t t-scale))
+           (gstr/format "NACA\n(%s, %s, %s)" m p t))]))
 
 (defn naca-plot []
   (let [naca-params (r/atom {:m 0.02 :p 0.4 :t 0.12 :open? false :unit :naca-unit})]
@@ -199,4 +203,7 @@
            [re-com/checkbox {:model     (:open? @naca-params)
                              :on-change #(swap! naca-params assoc :open? %)
                              :label     "Open Trailing Edge"}]
-           [naca-text @naca-params]]]]))))
+           [naca-text (assoc @naca-params
+                             :m-scale m-scale
+                             :p-scale p-scale
+                             :t-scale t-scale)]]]]))))
