@@ -142,10 +142,13 @@
   [{:keys [:m :p :t :m-scale :p-scale :t-scale :unit]}]
   (let [round-fn (fn [par]
                    (if (= unit :naca-unit)
-                     (gstr/format "%.2f" par)
-                     (gstr/format "%.2f" par)))]
+                     (int par)
+                     (gstr/format "%.2f" par)))
+        m (round-fn (* m m-scale))
+        p (round-fn (* p p-scale))
+        t (round-fn (* t t-scale))]
     [:h1 (if (= unit :naca-unit)
-           (gstr/format "NACA %s%s%s" (* m m-scale) (* p p-scale) (* t t-scale))
+           (gstr/format "NACA %s%s%s" m p t)
            (gstr/format "NACA\n(%s, %s, %s)" m p t))]))
 
 (defn naca-plot []
