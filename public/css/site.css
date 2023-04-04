@@ -72,6 +72,10 @@ a:hover {
     justify-items: stretch;
 }
 
+.main-plot-controls > * p {
+    margin: 0 0 0;
+}
+
 .text-container{
     max-width: 900px;
     margin: 30px auto;

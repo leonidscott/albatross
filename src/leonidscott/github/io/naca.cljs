@@ -1,5 +1,6 @@
 (ns leonidscott.github.io.naca
   (:require
+   [goog.string :as gstr]
    [leonidscott.github.io.plot :as plot]
    [reagent.core :as r]
    [re-com.core :as re-com]))
@@ -116,7 +117,9 @@
 (defn param-slider
   [{:keys [value on-change min max text]}]
   [:div {:style {:max-width "100%"}}
-   [:p {:style {:margin "0 0 0"}}[:b text]]
+   [:p [:b text]]
+   [:p {:style {:color "red" :font-size "1em"}}
+    (gstr/format "range from %s to %s" min max)]
    [:div {:style {:display         "flex"
                   :flex-direction  "row"
                   :flex-wrap       "nowrap"
@@ -126,62 +129,74 @@
                     :on-change on-change
                     :min       min
                     :max       max
+                    :step      (/ max 100)
                     :parts     {:wrapper {:style {:max-width "70%"}}}
                     :style     {:max-width "100%"}}]
     [re-com/input-text
      :model     (.toString value)
      :on-change on-change
-     :width     "50px"]]])
+     :width     "55px"]]])
+
+
+(defn naca-text
+  [{:keys [:m :p :t :unit]}]
+  [:h1 (if (= unit :naca-unit)
+         (gstr/format "NACA %s%s%s" (* m 100) (* p 10) (* t 100))
+         (gstr/format "NACA\n(%s, %s, %s)" m p t))])
 
 (defn naca-plot []
   (let [naca-params (r/atom {:m 0.02 :p 0.4 :t 0.12 :open? false :unit :naca-unit})]
     (fn []
-      [:div.main-plot
-       [plot/plot {:element-id "naca-plot"
-                   :data       (naca-data @naca-params)
-                   :layout     {:margin {:b 30 :l 30 :t 30 :r 30}
-                                :xaxis  {:range    [-0.2 1.2]
-                                         :dtick    0.25
-                                         :showgrid false
-                                         :zeroline false
-                                         :showline true}
-                                :yaxis  {:range    [-0.25 0.25]
-                                         :dtick    0.25
-                                         :showgrid false
-                                         :zeroline false
-                                         :showline true
-                                         :scaleanchor "x"
-                                         :scaleratio 1}
-                                :showlegend false}
-                   :config     {:staticPlot true
-                                :responsive true}}]
-       [:div.main-plot-controls
-        [:div {:style {:display        "flex"
-                       :flex-direction "column"}}
-         [param-slider {:value     (* (:m @naca-params) 100)
-                        :on-change #(swap! naca-params assoc :m (/ % 100))
-                        :min       0
-                        :max       100
-                        :text      "M (Max Camber)"}]
-         [param-slider {:value     (* (:p @naca-params) 100)
-                        :on-change #(swap! naca-params assoc :p (/ % 100))
-                        :min       0
-                        :max       100
-                        :text      "P (Position Camber)"}]
-         [param-slider {:value     (* (:t @naca-params) 100)
-                        :on-change #(swap! naca-params assoc :t (/ % 100))
-                        :min       0
-                        :max       40
-                        :text      "XX (Thickness)"}]]
-        [:div {:style {:margin-left "15px"}}
-         [:p {:style {:margin "0 0 0"}} [:b "Units"]]
-         [re-com/horizontal-bar-tabs
-          :model (:unit @naca-params)
-          :tabs  [{:id :naca-unit :label [:p "NACA"]}
-                  {:id :percentages :label [:p "%'s"]}]
-          :on-change #(swap! naca-params assoc :unit %)]
+      (let [m-scale (if (= :naca-unit (:unit @naca-params)) 100 1)
+            p-scale (if (= :naca-unit (:unit @naca-params)) 10 1)
+            t-scale (if (= :naca-unit (:unit @naca-params)) 100 1)]
+        [:div.main-plot
+         [plot/plot {:element-id "naca-plot"
+                     :data       (naca-data @naca-params)
+                     :layout     {:margin     {:b 30 :l 30 :t 30 :r 30}
+                                  :xaxis      {:range    [-0.2 1.2]
+                                               :dtick    0.25
+                                               :showgrid false
+                                               :zeroline false
+                                               :showline true}
+                                  :yaxis      {:range       [-0.25 0.25]
+                                               :dtick       0.25
+                                               :showgrid    false
+                                               :zeroline    false
+                                               :showline    true
+                                               :scaleanchor "x"
+                                               :scaleratio  1}
+                                  :showlegend false}
+                     :config     {:staticPlot true
+                                  :responsive true}}]
+         [:div.main-plot-controls
+          [:div {:style {:display        "flex"
+                         :flex-direction "column"}}
+           [param-slider {:value     (* (:m @naca-params) m-scale)
+                          :on-change #(swap! naca-params assoc :m (/ % m-scale))
+                          :min       0
+                          :max       (* m-scale 0.1)
+                          :text      "M (Max Camber)"}]
+           [param-slider {:value     (* (:p @naca-params) p-scale)
+                          :on-change #(swap! naca-params assoc :p (/ % p-scale))
+                          :min       0
+                          :max       p-scale
+                          :text      "P (Position Camber)"}]
+           [param-slider {:value     (* (:t @naca-params) t-scale)
+                          :on-change #(swap! naca-params assoc :t (/ % t-scale))
+                          :min       0
+                          :max       (* t-scale 0.4)
+                          :text      "XX (Thickness)"}]]
+          [:div {:style {:margin-left "15px"}}
+           [:p [:b "Units"]]
+           [re-com/horizontal-bar-tabs
+            :model (:unit @naca-params)
+            :tabs  [{:id :naca-unit :label [:p "NACA"]}
+                    {:id :percentages :label [:p "%'s"]}]
+            :on-change #(swap! naca-params assoc :unit %)]
 
-         [:p {:style {:margin "15px 0 0"}} [:b "Open Trailing Edge?"]]
-         [re-com/checkbox {:model (:open? @naca-params)
-                           :on-change #(swap! naca-params assoc :open? %)
-                           :label "Open Trailing Edge"}]]]])))
+           [:p {:style {:margin "15px 0 0"}} [:b "Open Trailing Edge?"]]
+           [re-com/checkbox {:model     (:open? @naca-params)
+                             :on-change #(swap! naca-params assoc :open? %)
+                             :label     "Open Trailing Edge"}]
+           [naca-text @naca-params]]]]))))

@@ -45,11 +45,13 @@
 ;;   * Publish to github
 ;; Graph
 ;;   * Center graph :kind of done:
-;;   * Better slider bounds
-;;   * Make unit conversion functional
-;;   * Make it clear what the slider boundaries are.
-;;   * Make nicer default state
+;;   * Better slider bounds :check:
+;;   * Make unit conversion functional :check:
+;;   * Make it clear what the slider boundaries are. :check:
+;;   * Make nicer default state :good  enough:
+;;   * Truncate NACA Values
 ;; Explanation
+;;   * Enter explanation of open trailing edges
 ;;   * Get someone to proofread
 ;; Future
 ;;   * Make headings collapsable
