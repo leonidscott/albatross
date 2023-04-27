@@ -148,7 +148,7 @@
         p (round-fn (* p p-scale))
         t (round-fn (* t t-scale))]
     [:h1 (if (= unit :naca-unit)
-           (gstr/format "NACA %s%s%s" m p t)
+           (gstr/format "NACA %s%s%s" m p (if (< t 10) (str "0" t) t))
            (gstr/format "NACA\n(%s, %s, %s)" m p t))]))
 
 (defn naca-plot []
