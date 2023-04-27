@@ -59,3 +59,39 @@ a:hover {
     height: 75px;
     background-color: #D6D6D4;
 }
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-me h2 p {
+    text-align: center;
+}
+
+
+.media-tab {
+    display: flex;
+    justify-content: center;
+}
+
+.media-tab i{
+    font-size: 35px;
+}
+
+a.green {
+    color: MediumSeaGreen;
+}
+
+a.green:hover {
+    color: green;
+}
+
+a.black {
+    color: gray;
+}
+
+a.black:hover {
+    color: black;
+}

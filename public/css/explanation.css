@@ -30,7 +30,7 @@
     font-weight: bold;
 }
 
-.explanation > p, .demo-text > ul {
+.explanation > p {
     font-family: georgia, serif;
     font-size: 18px;
     line-height: 1.611em;
@@ -39,7 +39,7 @@
     martin-top: 1em;
 }
 
-.explanation > p > code, .demo-text > ul > li > code {
+.explanation > p > code {
     font-size: 16px;
     background-color: #f5f5f4;
     padding: 0 3px;

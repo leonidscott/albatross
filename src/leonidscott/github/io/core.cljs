@@ -54,6 +54,7 @@
 ;;   * Enter explanation of open trailing edges
 ;;   * Get someone to proofread
 ;; Future
+;;   * (Plot) Add ticks to sliders in naca mode, and change max values in %  mode.
 ;;   * Make headings collapsable
 ;;   * Make equations description
 ;;   * Swap to Material UI sliders? (If I have more components)

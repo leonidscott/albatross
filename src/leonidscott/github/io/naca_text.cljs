@@ -1,4 +1,7 @@
-(ns leonidscott.github.io.naca-text)
+(ns leonidscott.github.io.naca-text
+  (:require
+   [reagent.core :as r]
+   [re-com.core :as re-com]))
 
 (defn img-comp
   [{:keys [src alt href]}]
@@ -45,7 +48,62 @@
 
    [:li [:b "P (Maximum Camber Position) "] "defines where along the chord line the maximum camber lays. " [:em "P "] "is defined as a percentage of the chord line length, starting from the leading edge, and is measured in tenths of a percent. For our example " [:code "NACA 2415"] " foil with a 1m chord, this would mean the maximum camber would lay 40% (40cm) down the length of the chord line."]
 
-   [:li [:b "XX (Thickness) "] "(Denoted as " [:b "T"] " above) describes the maximum thickness of the foil as a percentage of the chord line length in hundredths of a percent. Therefore, our " [:code "NACA 2415"] " foil should have a maximum thickness of 15% of the chord line length (15cm)."]])
+   [:li [:b "XX (Thickness) "] "(Denoted as " [:b "T"] " above) describes the maximum thickness of the foil as a percentage of the chord line length in hundredths of a percent. Therefore, our " [:code "NACA 2415"] " foil should have a maximum thickness of 15% of the chord line length (15cm)."]
+   [:p ""]
+   [:p "The last remaining piece of a NACA 4 foil is the open/closed trailing edge. By default, NACA 4 foils are closed at their trailing edge, meaning the upper and lower surfaces of the foil blend into a single sharp edge. By contrast, in an open trailing edge foil, the upper and lower surfaces form to create a blunt trailing edge. Open trailing edge foils tend to create slightly more lift and drag than their closed counterparts. In addition, they tend to produce less trailing edge vibrations that can result in audible noise, this is especially true for rudders on ships. However, an open trailing edge’s main benefits come from a simpler construction and more manageable structural loading."]])
+
+
+(defn email-media []
+  (let [popover-state (r/atom {:open? false})]
+    (fn []
+      [re-com/popover-tooltip
+       {:label    "copied!"#_[:i {:style {:font-size "15px"}
+                       :class "zmdi zmdi-copy"}]
+        :showing? (:open? @popover-state)
+        :position :above-right
+
+        :anchor
+        [:a {:style {:margin "0 5px"}
+             :class "green"
+             :on-click
+             (fn []
+               (-> js/navigator .-clipboard (.writeText "scott.leonid@gmail.com"))
+               (swap! popover-state assoc :open? true)
+               (js/setTimeout
+                 #(swap! popover-state assoc :open? false)
+                 2000))}
+         [:i {:class "zmdi zmdi-email"}]]}])))
+
+(defn media
+  [{:keys [icon href color]}]
+  [:a {:href href
+       :target "_blank"
+       :style {:margin "0 5px"}
+       :class color}
+   [:i {:class icon}]])
+
+(defn about-me []
+  [:div.about-me
+   [:h2 "About the author"]
+   [:img {:src "imgs/d8b91fe5-45e8-4eaf-ab8c-e15e0bac2ef8.jpg"
+          :alt "me"
+          :style {:margin "15px auto"
+                  :width "30%"
+                  :height "30%"
+                  :border-radius "50%"}}]
+   [:p {:style {:width "70%"
+                :max-width "552px"}}
+    "Hi there! 👋 I’m Leonid Scott. I’m a software engineer with an interest in Computational Fluid Dynamics, and Foil Shape Optimization. If you like what you see, or don’t like what you see, or have some sort of opinion in between, let me know! You  can find me in one these locations."]
+   [:div.media-tab
+    [email-media]
+    [media {:icon "zmdi zmdi-linkedin-box"
+            :href "https://www.linkedin.com/in/leonid-scott/"}]
+    [media {:icon  "zmdi zmdi-github"
+            :href  "https://github.com/leonidscott"
+            :color "black"}]
+    [media {:icon  "zmdi zmdi-file-text"
+            :href  "https://www.linkedin.com/in/leonid-scott/overlay/1635503356225/single-media-viewer/?profileId=ACoAACWbeNMBpoWwjc0ti6ZgEwrsadgSC8hxHJs"
+            :color "black"}]]])
 
 (defn text []
   [:div.text-container
@@ -53,4 +111,5 @@
     [:h1 "What is a NACA 4 Foil?"]
     [introduction]
     [geometric-properties]
-    [naca-mpxx]]])
+    [naca-mpxx]
+    [about-me]]])
