@@ -1,10 +1,26 @@
 {
+  "name": "albatross",
+  "version": "0.1.0",
+  "main": "index.js",
+  "description": "Explore NACA 4 foils, Thin Aerofoil Theory, and Evolutionary Computation",
+  "scripts": {
+        "watch": "shadow-cljs watch app",
+        "compile": "shadow-cljs compile app",
+        "release": "shadow-cljs release app",
+        "html": "mkdir -p target && cp public/index.html target/",
+        "serve": "yarn html && http-server target/",
+        "del": "rm -r target/*",
+        "build": "yarn release && yarn html && yarn serve"
+  },
   "devDependencies": {
-    "shadow-cljs": "^2.19.2"
+    "shadow-cljs": "^2.19.2",
+    "http-server": "^0.12.3"
   },
   "dependencies": {
     "plotly.js-dist-min": "^2.18.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  }
+  },
+  "author": "Leonid Scott",
+  "license": "MIT"
 }

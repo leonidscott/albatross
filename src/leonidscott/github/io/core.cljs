@@ -34,7 +34,6 @@
     (d/unmount-component-at-node root-el)
     (d/render [home-page] root-el)))
 
-
 (defn init []
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)

@@ -4,10 +4,8 @@
                 [reagent "1.1.1"]
                 [re-com "2.13.2"] ;; get rid of at some point
                 [re-frame "1.3.0"]]
- :builds       {:app {:target     :browser
-                      :output-dir "public/js"
-                      :asset-path "/js"
-                      :modules    {:app {:init-fn leonidscott.github.io.core/init}}
-                      :devtools   {}}}
-
- :dev-http     {3000 {:root "public"}}}
+ :builds {:app {:output-dir "public/js"
+                :asset-path "public/"
+                :target :browser
+                :modules {:app {:init-fn leonidscott.github.io.core/init}}}}
+ :dev-http     {8080 "public/"}}
