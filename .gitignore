@@ -20,4 +20,10 @@ pom.xml.asc
 
 ### Node ###
 #Dependency directories
-node_modules/
+/node_modules
+
+### Yarn ###
+/yarn.lock
+/package-lock.json
+/*.log
+.shadow-cljs/
