@@ -23,7 +23,7 @@ pom.xml.asc
 /node_modules
 
 ### Yarn ###
-/yarn.lock
-/package-lock.json
+yarn.lock
+package-lock.json
 /*.log
 .shadow-cljs/
