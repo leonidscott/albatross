@@ -1,0 +1,97 @@
+@import "plot.css";
+@import "explanation.css";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue', arial;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 1.125em;
+  background-color: #eeeeec;
+  line-height: 1.5em;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* TODO: Go through h1, h2, h3, a, a:hover and figure out if I should just get rid of them. I can probs move explanation text into these fields then. */
+h1, h2, h3 {
+  color: #000;
+  /*margin: 0px;*/ /* Re-com thing */
+  font-size: 3em;
+}
+h1 {
+  font-size: 2.5em
+}
+
+h2 {
+    font-size: 2em;
+    margin: 0px; /* Re-com thing */
+}
+
+h3 {
+  font-size: 1.5em
+}
+
+a {
+  text-decoration: none;
+  color: #09f;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.banner-text {
+    margin: 0;
+    position: absolute;
+    font-family: 'Pacifico', cursive;
+    padding: 15px;
+    color: #1e36fd;
+}
+
+.banner {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: 75px;
+    background-color: #D6D6D4;
+}
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-me h2 p {
+    text-align: center;
+}
+
+
+.media-tab {
+    display: flex;
+    justify-content: center;
+}
+
+.media-tab i{
+    font-size: 35px;
+}
+
+a.green {
+    color: MediumSeaGreen;
+}
+
+a.green:hover {
+    color: green;
+}
+
+a.black {
+    color: gray;
+}
+
+a.black:hover {
+    color: black;
+}

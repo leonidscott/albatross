@@ -1,0 +1,1 @@
+{"version":3,"sources":["leonidscott/github/io/config.cljs"],"mappings":";AAEA,AAAKA,4CAAgBC","names":["leonidscott.github.io.config/debug?","js/goog.DEBUG"],"sourcesContent":["(ns leonidscott.github.io.config)\n\n(def debug? ^boolean goog.DEBUG)\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["leonidscott/github/io/db.cljs"],"mappings":";AAEA,sCAAA,tCAAKA","names":["leonidscott.github.io.db/default-db"],"sourcesContent":["(ns leonidscott.github.io.db)\n\n(def default-db {})\n"]}

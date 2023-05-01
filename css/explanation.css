@@ -1,0 +1,51 @@
+.text-container{
+    max-width: 900px;
+    margin: 30px auto;
+    padding-bottom: 60px;
+}
+
+.explanation {
+    background-color: #fff;
+    overflow: auto;
+    padding: 29px 60px 15px 60px;
+    word-wrap: break-word;
+}
+
+.explanation > h1 {
+    font-size: 48px;
+    color: rgba(0, 0, 0, 0.75);
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue', arial;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+.explanation h2 {
+    font-size: 24px;
+    line-height: 26px;
+    margin-top: 38px;
+    margin-bottom: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+}
+
+.explanation > p {
+    font-family: georgia, serif;
+    font-size: 18px;
+    line-height: 1.611em;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 1em;
+    martin-top: 1em;
+}
+
+.explanation > p > code {
+    font-size: 16px;
+    background-color: #f5f5f4;
+    padding: 0 3px;
+}
+
+.explanation > ul > li {
+    margin-bottom: 0.5em;
+}
+

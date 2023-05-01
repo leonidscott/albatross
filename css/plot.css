@@ -1,0 +1,18 @@
+.main-plot {
+    display: grid;
+    grid-template-rows: 50vh 1fr;
+    grid-gap: 20px;
+    margin: 30px 5vw;
+    max-width: 800px;
+}
+
+.main-plot-controls {
+    display: grid;
+    grid-template-columns: 55% 1fr;
+    grid-gap: 10px;
+    justify-items: stretch;
+}
+
+.main-plot-controls > * p {
+    margin: 0 0 0;
+}
