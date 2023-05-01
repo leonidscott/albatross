@@ -7,11 +7,13 @@
     "watch": "shadow-cljs watch app",
     "compile": "shadow-cljs compile app",
     "release": "shadow-cljs release app",
-    "serve": "http-server target/",
+    "serve": "http-server public/",
     "del": "rm -r public/js/*",
-    "build": "yarn release && yarn serve",
-    "predeploy": "yarn && yarn del && yarn build"
-    "deploy": "gh-pages -d build"
+    "build": "yarn && yarn del && yarn compile && yarn release",
+    "start": "yarn serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d public",
+    "my-help": "gh-pages --help"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0",
