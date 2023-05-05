@@ -1,5 +1,6 @@
 {
   "name": "albatross",
+  "homepage": "https://leonidsoctt.github.io/albatross/",
   "version": "0.1.0",
   "main": "index.js",
   "description": "Explore NACA 4 foils, Thin Aerofoil Theory, and Evolutionary Computation",
